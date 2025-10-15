@@ -57,6 +57,7 @@ const questionSlice = createSlice({
       })
       .addCase(getQuestions.rejected, (state, action) => {
         state.status = "failed";
+        state.questions = que
         state.error = action.error.message;
       });
   }

@@ -5,6 +5,7 @@ import { contextValue } from "../Context/QuizContext";
 import useFetch from "../hooks/useFetch";
 import { useSelector, useDispatch } from "react-redux";
 import { getQuestions } from "../features/question.slice";
+import { Mosaic } from "react-loading-indicators";
 
 const Question = () => {
   const dispatch = useDispatch();
@@ -13,18 +14,15 @@ const Question = () => {
     (state) => state.questionsState
   );
 
-  // useEffect(() => {
-
-  // }, []);
-
   if (questions.length === 0 || status === "loading") {
     return (
       <>
-        <div className="d-flex justify-content-center">
-          <div className="spinner-border" role="status">
-            <span className="visually-hidden">Loading...</span>
-          </div>
-        </div>
+        <Mosaic
+          color="#32cd32"
+          size="medium"
+          text="Generating Questions..."
+          textColor=""
+        />
       </>
     );
   }

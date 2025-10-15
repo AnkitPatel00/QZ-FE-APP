@@ -27,8 +27,8 @@ const GameOver = () => {
   };
 
   return (
-    <div>
-      <p>
+    <div className="text-center">
+      <p className="display-5">
         {score}/{questions.length}
       </p>
       <h3>Game Over</h3>
