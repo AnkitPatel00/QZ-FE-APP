@@ -6,11 +6,14 @@ import { TrophySpin } from "react-loading-indicators";
 const GameMenu = () => {
   const dispatch = useDispatch();
   const [category, setCategory] = useState("fullstack");
+  const [difficulty, setDifficulty] = useState("easy");
 
   const handleGameStart = () => {
     dispatch(gameMenuToggle(false));
-    dispatch(getQuestions({ category }));
+    dispatch(getQuestions({ category, difficulty }));
   };
+
+  console.log(difficulty);
 
   return (
     <div>
@@ -28,6 +31,52 @@ const GameMenu = () => {
           <option value="react">React</option>
           <option value="backend">Backend</option>
         </select>
+      </div>
+
+      <p>Difficulty</p>
+      <div className="d-flex  mb-3">
+        <div className="form-check  me-2">
+          <input
+            checked={difficulty === "easy"}
+            className="form-check-input"
+            value="easy"
+            id="easy"
+            type="radio"
+            name="difficulty"
+            onChange={(e) => setDifficulty(e.target.value)}
+          />
+          <label className="form-check-label" htmlFor="easy">
+            Easy
+          </label>
+        </div>
+        <div className="form-check  me-2">
+          <input
+            checked={difficulty === "medium"}
+            className="form-check-input"
+            value="medium"
+            id="medium"
+            type="radio"
+            name="difficulty"
+            onChange={(e) => setDifficulty(e.target.value)}
+          />
+          <label className="form-check-label" htmlFor="medium">
+            Medium
+          </label>
+        </div>
+        <div className="form-check  me-2">
+          <input
+            checked={difficulty === "hard"}
+            className="form-check-input"
+            value="hard"
+            id="hard"
+            type="radio"
+            name="difficulty"
+            onChange={(e) => setDifficulty(e.target.value)}
+          />
+          <label className="form-check-label" htmlFor="hard">
+            Hard
+          </label>
+        </div>
       </div>
 
       <div className="d-flex justify-content-center">

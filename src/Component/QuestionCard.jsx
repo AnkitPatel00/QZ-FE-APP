@@ -4,14 +4,15 @@ import {
   gameOverToggle,
   increaseScore,
   increaseQuestionIndex,
+  gameAnswerVisible,
 } from "../features/question.slice";
+import Answer from "./Answer";
 
 const QuestionCard = () => {
   const dispatch = useDispatch();
 
-  const { questions, error, status, score, questionIndex } = useSelector(
-    (state) => state.questionsState
-  );
+  const { questions, error, status, score, questionIndex, answerVisible } =
+    useSelector((state) => state.questionsState);
 
   // const [questionIndex, setQuestionIndex] = useState(0);
   const [timer, setTimer] = useState(30);
@@ -56,7 +57,10 @@ const QuestionCard = () => {
       });
     }, 1000);
 
-    return () => clearInterval(interval);
+    return () => {
+      dispatch(gameAnswerVisible(false));
+      clearInterval(interval);
+    };
   }, [questionIndex]);
 
   // Watch timer and move to next question when it hits 0
@@ -68,14 +72,12 @@ const QuestionCard = () => {
         dispatch(gameOverToggle(true));
       }
     }
-  }, [timer, questionIndex, dispatch]);
+  }, [timer]);
 
   return (
     <>
       <div>
-        {/* responsive header: stacked on xs, time left / score right on md+ */}
         <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3 w-100">
-          {/* left: time */}
           <div className="d-flex align-items-center mb-2 mb-md-0">
             <span className="h5 mb-0 me-2">Time:</span>
             <span className="h5 text-info mb-0">{timer}</span>
@@ -113,6 +115,14 @@ const QuestionCard = () => {
         <button className="btn btn-primary mt-4" onClick={handleSubmit}>
           Submit
         </button>
+      </div>
+
+      <div>
+        <Answer
+          answer={answer}
+          explanation={explanation}
+          answerVisible={answerVisible}
+        />
       </div>
     </>
   );

@@ -1,0 +1,25 @@
+/* container hides overflow and transitions */
+.answer-wrapper {
+  overflow: hidden;
+  max-height: 0;                 /* collapsed */
+  opacity: 0;
+  transform: translateY(-6px) scale(0.98);
+  transition: max-height 320ms cubic-bezier(.2,.8,.2,1),
+              opacity 220ms ease,
+              transform 260ms cubic-bezier(.2,.8,.2,1);
+  /* pointer-events none while hidden */
+  pointer-events: none;
+}
+
+/* when open */
+.answer-wrapper.open {
+  max-height: 500px; /* large enough to contain content */
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* inner padding/width preserved */
+.answer-content {
+  width: 300px; /* same as you had */
+}

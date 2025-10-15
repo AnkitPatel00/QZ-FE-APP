@@ -6,9 +6,22 @@ const BACKEND = import.meta.env.VITE_BACKEND
 
 export const getQuestions = createAsyncThunk(
   "get/questions",
-  async ({ category }) => {
+  async ({ category, difficulty }) => {
+    let query= ""
+    if (category && difficulty)
+    {
+      query = `?category=${category}&difficulty=${difficulty}`;
+    }
+    else if (category)
+    {
+query = `?category=${category}`;
+    }
+    else if (difficulty)
+    {
+query = `?difficulty=${difficulty}`;
+    }
     try {
-      const response = await fetch(`${BACKEND}/quiz${category?`?category=${category}`:""}`);
+      const response = await fetch(`${BACKEND}/quiz${query}`);
       const data = await response.json();
       return data;
       
@@ -28,6 +41,7 @@ const questionSlice = createSlice({
     questionIndex: 0,
     gameMenu:true,
     gameOver: false,
+    answerVisible: false,
   },
   reducers: {
 
@@ -36,6 +50,9 @@ const questionSlice = createSlice({
     },
     gameMenuToggle: (state,action) => {
       state.gameMenu = action.payload
+    },
+    gameAnswerVisible: (state,action) => {
+      state.answerVisible = action.payload ?? !state.answerVisible
     },
     increaseScore: (state,action) => {
       state.score = action.payload ?? state.score +1
@@ -64,4 +81,4 @@ const questionSlice = createSlice({
 });
 
 export default questionSlice.reducer;
-export const {gameOverToggle,increaseScore,increaseQuestionIndex,gameMenuToggle} = questionSlice.actions;
+export const {gameOverToggle,increaseScore,increaseQuestionIndex,gameMenuToggle,gameAnswerVisible} = questionSlice.actions;
