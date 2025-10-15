@@ -80,7 +80,12 @@ const QuestionCard = () => {
         <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3 w-100">
           <div className="d-flex align-items-center mb-2 mb-md-0">
             <span className="h5 mb-0 me-2">Time:</span>
-            <span className="h5 text-info mb-0">{timer}</span>
+            <span
+              key={timer} // ensures re-render on each tick
+              className="h5 text-info mb-0 bounce"
+            >
+              {timer}
+            </span>
           </div>
 
           {/* right: score */}

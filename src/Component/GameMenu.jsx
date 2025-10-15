@@ -2,6 +2,8 @@ import { useDispatch } from "react-redux";
 import { gameMenuToggle, getQuestions } from "../features/question.slice";
 import { useState } from "react";
 import { TrophySpin } from "react-loading-indicators";
+import { Player } from "@lottiefiles/react-lottie-player";
+import chatbot from "../assets/animation/chatbot.json";
 
 const GameMenu = () => {
   const dispatch = useDispatch();
@@ -18,9 +20,15 @@ const GameMenu = () => {
   return (
     <div>
       <div className="d-flex justify-content-center">
-        <TrophySpin color="#32cd32" size="medium" text="" textColor="" />
+        <Player
+          autoplay
+          loop
+          src={chatbot}
+          style={{ height: "220px", width: "220px" }}
+        />
+        {/* <TrophySpin color="#32cd32" size="medium" text="" textColor="" /> */}
       </div>
-      <h2 className="my-3 display-5">MernStack Quiz App</h2>
+      <h2 className="my-3 display-5">AI Quiz App</h2>
       <label>Topics</label>
       <div className="d-flex justify-content-center mb-3">
         <select

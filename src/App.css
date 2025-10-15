@@ -12,3 +12,18 @@
 }
 
 
+/* Add this in your CSS file or inside a <style> tag */
+@keyframes bounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.4);
+  }
+}
+
+.bounce {
+  animation: bounce 0.4s ease;
+}
+
+
